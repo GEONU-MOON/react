@@ -1,0 +1,116 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+.dark-input::placeholder {
+  color: #dee2e6;
+  opacity: 1;
+}
+
+.write-form {
+  background-color: #282c34;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.write-form label {
+  color: #f8f9fa;
+  font-weight: bold;
+}
+
+.write-form .form-control {
+  background-color: #343a40;
+  color: #f8f9fa;
+  border: none;
+  border-radius: 8px;
+  padding: 1rem;
+  transition: all 0.2s ease;
+}
+
+.write-form .form-control:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.write-form .btn-primary {
+  background-color: #004a76;
+  border-color: #004a76;
+  transition: all 0.2s ease;
+}
+
+.write-form .btn-primary:hover {
+  background-color: #004a76;
+  border-color: #004a70;
+}
+
+.dark-card {
+  background-color: #343a40;
+  color: #dee2e6;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  min-height: 200px;
+  margin-top: 20px;
+}
+
+.dark-card .card-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.btn-warning {
+  background-color: #ffc107; /* 노란색 배경 */
+  border-color: #ffc107; /* 노란색 테두리 */
+}
+
+.btn-warning:hover {
+  background-color: #e0a800; /* 호버 시 어두운 노란색 */
+  border-color: #d39e00;
+}
+
+.btn-danger {
+  background-color: #dc3545; /* 빨간색 배경 */
+  border-color: #dc3545; /* 빨간색 테두리 */
+}
+
+.btn-danger:hover {
+  background-color: #c82333; /* 호버 시 어두운 빨간색 */
+  border-color: #bd2130;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
