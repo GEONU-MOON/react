@@ -31,11 +31,17 @@ function Edit() {
       alert("제목은 10글자 이상 입력해야 합니다.");
       return;
     }
-    dispatch(updatePost({ id, title: editedTitle, content: editedContent }));
-    navigate("/");
+    dispatch(
+      updatePost({
+        id: parseInt(id),
+        title: editedTitle,
+        content: editedContent,
+      })
+    );
+    navigate(`/detail/${id}`);
   };
 
-  if (!post) return null; // post가 없으면 null 반환 (로딩 중 처리)
+  if (!post) return null; // post가 없으면 null 반환
 
   return (
     <Container className="mt-4">

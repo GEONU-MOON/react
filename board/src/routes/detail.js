@@ -23,12 +23,12 @@ function Detail() {
 
   const handleDelete = () => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
-      dispatch(deletePost(parseInt(id))); // id를 숫자로 변환
+      dispatch(deletePost(parseInt(id)));
       navigate("/");
     }
   };
 
-  if (!post) return null; // post가 없으면 null 반환 (로딩 중 처리)
+  if (!post) return null;
 
   return (
     <div className="container mt-4">

@@ -4,7 +4,7 @@ import { Container, Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { addPost } from "../store.js";
 import { useNavigate } from "react-router-dom";
-import "../App.css"; // 커스텀 CSS 파일 import
+import "../App.css";
 
 function Write(props) {
   const dispatch = useDispatch();
