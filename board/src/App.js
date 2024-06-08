@@ -7,9 +7,10 @@ import Edit from "./routes/edit.js";
 import Detail from "./routes/detail.js";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import { PencilSquare } from "react-bootstrap-icons";
+import axios from "axios";
 
 function App() {
-  let [contents] = useState(data);
+  let [contents, setContents] = useState(data);
   let navigate = useNavigate();
 
   return (
@@ -43,12 +44,26 @@ function App() {
                   return <Lists contents={contents[i]}></Lists>;
                 })}
               </Row>
+              {/* <button
+                onClick={() => {
+                  axios
+                    .get("https://codingapple1.github.io/shop/data2.json")
+                    .then((결과) => {
+                      console.log(결과.data);
+                      let copy = [...contents, ...결과.data];
+                      setContents(copy);
+                    });
+                  // axios.post('/api/data', {data: contents})
+                }} 
+              >
+                버튼
+              </button> */}
             </Container>
           }
         />
         <Route path="/detail/:id" element={<Detail contents={contents} />} />
         <Route path="/write" element={<Write />} />
-        <Route path="/edit" element={<Edit />} />
+        <Route path="/edit/:id" element={<Edit contents={contents} />} />
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>
     </div>
@@ -58,12 +73,17 @@ function App() {
 function Lists(props) {
   return (
     <Col xs={12} md={props.isThree ? 4 : 3}>
-      <Card className="dark-card">
-        <Card.Body>
-          <Card.Title>{props.contents.title}</Card.Title>
-          <Card.Text>{props.contents.content}</Card.Text>
-        </Card.Body>
-      </Card>
+      <Link
+        to={`/detail/${props.contents.id}`}
+        className="text-decoration-none"
+      >
+        <Card className="dark-card">
+          <Card.Body>
+            <Card.Title>{props.contents.title}</Card.Title>
+            <Card.Text>{props.contents.content}</Card.Text>
+          </Card.Body>
+        </Card>
+      </Link>
     </Col>
   );
 }

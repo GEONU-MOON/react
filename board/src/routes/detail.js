@@ -1,6 +1,8 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import styled from "styled-components";
 import "../App.css";
+import { useEffect } from "react";
+import { useState } from "react";
 
 function Detail(props) {
   let { id } = useParams();
@@ -38,9 +40,9 @@ function Detail(props) {
         </div>
 
         <div className="d-flex justify-content-end mt-3">
-          <button type="button" className="btn btn-warning me-2">
+          <Link to={`/edit/${id}`} className="btn btn-warning me-2">
             수정하기
-          </button>
+          </Link>
           <button type="button" className="btn btn-danger">
             삭제하기
           </button>

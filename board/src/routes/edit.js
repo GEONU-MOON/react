@@ -1,6 +1,12 @@
 import "../App.css"; // 커스텀 CSS 파일 import
+import { useParams } from "react-router-dom";
 
-function Edit() {
+function Edit(props) {
+  let { id } = useParams();
+  let found = props.contents.find(function (x) {
+    return x.id == id;
+  });
+
   return (
     <div className="container mt-4">
       <form className="write-form">
@@ -12,7 +18,7 @@ function Edit() {
             type="text"
             id="title"
             className="form-control dark-input"
-            placeholder="제목을 입력하세요"
+            placeholder={found.title}
           />
         </div>
 
@@ -24,7 +30,7 @@ function Edit() {
             id="content"
             className="form-control dark-input"
             rows={10}
-            placeholder="내용을 입력하세요"
+            placeholder={found.content}
           ></textarea>
         </div>
 
