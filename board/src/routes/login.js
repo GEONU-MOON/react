@@ -49,13 +49,19 @@ function Login() {
           />
         </Form.Group>
 
-        <div className="d-flex justify-content-between mt-3">
-          <Button variant="primary" type="submit">
+        <div className="d-flex flex-column align-items-center mt-3">
+          <Button variant="primary" type="submit" className="w-100">
             로그인
           </Button>
-          <Link to="/register" className="btn btn-secondary">
-            회원가입
-          </Link>
+
+          <Form.Group className="mt-3">
+            <Link
+              to="/register"
+              className="text-decoration-underline text-light"
+            >
+              회원가입
+            </Link>
+          </Form.Group>
         </div>
       </Form>
     </Container>
