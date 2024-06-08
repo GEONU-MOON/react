@@ -1,4 +1,3 @@
-// write.js
 import { useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
@@ -20,7 +19,7 @@ function Write(props) {
           e.preventDefault();
 
           dispatch(addPost({ title, content }));
-          navigate("/");
+          navigate("/home");
         }}
       >
         <div className="mb-3">

@@ -1,19 +1,19 @@
 import "./App.css";
 import { useState } from "react";
 import { Container, Nav, Navbar, Row, Col, Card } from "react-bootstrap";
-import data from "./data.js";
 import Write from "./routes/write.js";
 import Edit from "./routes/edit.js";
 import Detail from "./routes/detail.js";
+import Login from "./routes/login.js";
+import Register from "./routes/register.js";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import { PencilSquare } from "react-bootstrap-icons";
 import axios from "axios";
 import { useSelector } from "react-redux";
+import Home from "./routes/home.js";
 
 function App() {
-  const posts = useSelector((state) => state.posts);
-  // let [contents, setContents] = useState(data);
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   return (
     <div className="App">
@@ -27,7 +27,7 @@ function App() {
             React-Log
           </Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link as={Link} to="/">
+            <Nav.Link as={Link} to="/home">
               Home
             </Nav.Link>
             <Nav.Link as={Link} to="/write">
@@ -37,53 +37,15 @@ function App() {
         </Container>
       </Navbar>
       <Routes>
-        <Route
-          path="/"
-          element={
-            <Container>
-              <Row className="justify-content-center">
-                {posts.map((post) => (
-                  <Lists post={post} key={post.id} /> // post 객체를 전달
-                ))}
-              </Row>
-              {/* <button
-                onClick={() => {
-                  axios
-                    .get("https://codingapple1.github.io/shop/data2.json")
-                    .then((결과) => {
-                      console.log(결과.data);
-                      let copy = [...contents, ...결과.data];
-                      setContents(copy);
-                    });
-                  // axios.post('/api/data', {data: contents})
-                }} 
-              >
-                버튼
-              </button> */}
-            </Container>
-          }
-        />
+        <Route path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/home" element={<Home />} /> // home 페이지 라우트 추가
         <Route path="/detail/:id" element={<Detail />} />
         <Route path="/write" element={<Write />} />
         <Route path="/edit/:id" element={<Edit />} />
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>
     </div>
-  );
-}
-
-function Lists({ post }) {
-  return (
-    <Col xs={12} md={post.isThree ? 4 : 3}>
-      <Link to={`/detail/${post.id}`} className="text-decoration-none">
-        <Card className="dark-card">
-          <Card.Body>
-            <Card.Title>{post.title}</Card.Title>
-            <Card.Text>{post.content}</Card.Text>
-          </Card.Body>
-        </Card>
-      </Link>
-    </Col>
   );
 }
 

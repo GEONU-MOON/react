@@ -17,14 +17,14 @@ function Detail() {
   useEffect(() => {
     if (!post) {
       alert("존재하지 않는 게시글입니다.");
-      navigate("/");
+      navigate("/home");
     }
   }, [post, navigate]);
 
   const handleDelete = () => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
       dispatch(deletePost(parseInt(id)));
-      navigate("/");
+      navigate("/home");
     }
   };
 
