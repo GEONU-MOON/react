@@ -1,9 +1,28 @@
+// write.js
+import { useState } from "react";
+import { Container, Form, Button } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { addPost } from "../store.js";
+import { useNavigate } from "react-router-dom";
 import "../App.css"; // 커스텀 CSS 파일 import
 
-function Write() {
+function Write(props) {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+
   return (
     <div className="container mt-4">
-      <form className="write-form">
+      <form
+        className="write-form"
+        onSubmit={(e) => {
+          e.preventDefault();
+
+          dispatch(addPost({ title, content }));
+          navigate("/");
+        }}
+      >
         <div className="mb-3">
           <label htmlFor="title" className="form-label text-light">
             제목
@@ -13,6 +32,9 @@ function Write() {
             id="title"
             className="form-control dark-input"
             placeholder="제목을 입력하세요"
+            onChange={(e) => {
+              setTitle(e.target.value);
+            }}
           />
         </div>
 
@@ -25,6 +47,9 @@ function Write() {
             className="form-control dark-input"
             rows={10}
             placeholder="내용을 입력하세요"
+            onChange={(e) => {
+              setContent(e.target.value);
+            }}
           ></textarea>
         </div>
 

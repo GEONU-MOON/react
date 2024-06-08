@@ -8,9 +8,11 @@ import Detail from "./routes/detail.js";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import { PencilSquare } from "react-bootstrap-icons";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 function App() {
-  let [contents, setContents] = useState(data);
+  const posts = useSelector((state) => state.posts);
+  // let [contents, setContents] = useState(data);
   let navigate = useNavigate();
 
   return (
@@ -40,9 +42,9 @@ function App() {
           element={
             <Container>
               <Row className="justify-content-center">
-                {contents.map((a, i) => {
-                  return <Lists contents={contents[i]}></Lists>;
-                })}
+                {posts.map((post) => (
+                  <Lists post={post} key={post.id} /> // post 객체를 전달
+                ))}
               </Row>
               {/* <button
                 onClick={() => {
@@ -61,26 +63,23 @@ function App() {
             </Container>
           }
         />
-        <Route path="/detail/:id" element={<Detail contents={contents} />} />
+        <Route path="/detail/:id" element={<Detail />} />
         <Route path="/write" element={<Write />} />
-        <Route path="/edit/:id" element={<Edit contents={contents} />} />
+        <Route path="/edit/:id" element={<Edit />} />
         <Route path="*" element={<div>Not Found</div>} />
       </Routes>
     </div>
   );
 }
 
-function Lists(props) {
+function Lists({ post }) {
   return (
-    <Col xs={12} md={props.isThree ? 4 : 3}>
-      <Link
-        to={`/detail/${props.contents.id}`}
-        className="text-decoration-none"
-      >
+    <Col xs={12} md={post.isThree ? 4 : 3}>
+      <Link to={`/detail/${post.id}`} className="text-decoration-none">
         <Card className="dark-card">
           <Card.Body>
-            <Card.Title>{props.contents.title}</Card.Title>
-            <Card.Text>{props.contents.content}</Card.Text>
+            <Card.Title>{post.title}</Card.Title>
+            <Card.Text>{post.content}</Card.Text>
           </Card.Body>
         </Card>
       </Link>
