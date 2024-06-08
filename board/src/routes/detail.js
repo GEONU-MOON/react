@@ -1,10 +1,10 @@
-import { useParams, Link } from "react-router-dom";
-import styled from "styled-components";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import "../App.css";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { deletePost } from "../store";
-import { useNavigate } from "react-router-dom";
+import { ArrowLeft } from "react-bootstrap-icons";
+import { Container, Form, Button } from "react-bootstrap";
 
 function Detail() {
   const { id } = useParams();
@@ -59,17 +59,22 @@ function Detail() {
           />
         </div>
 
-        <div className="d-flex justify-content-end mt-3">
-          <Link to={`/edit/${id}`} className="btn btn-warning me-2">
-            수정하기
-          </Link>
-          <button
-            type="button"
-            className="btn btn-danger"
-            onClick={handleDelete}
-          >
-            삭제하기
-          </button>
+        <div className="d-flex justify-content-between mt-3">
+          <Link to="/home" className="btn btn-secondary back-link">
+            <ArrowLeft />
+          </Link>{" "}
+          <div>
+            <Link to={`/edit/${id}`} className="btn btn-warning me-2">
+              수정하기
+            </Link>
+            <button
+              type="button"
+              className="btn btn-danger"
+              onClick={handleDelete}
+            >
+              삭제하기
+            </button>
+          </div>
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Form, Button } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addPost } from "../store.js";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
@@ -11,17 +11,23 @@ function Write(props) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    if (title.trim().length < 5) {
+      alert("제목은 5글자 이상 입력해야 합니다.");
+      return;
+    }
+    if (content.trim().length < 10) {
+      alert("내용은 10글자 이상 입력해야 합니다.");
+      return;
+    }
+    dispatch(addPost({ title, content }));
+    navigate("/home");
+  };
+
   return (
     <div className="container mt-4">
-      <form
-        className="write-form"
-        onSubmit={(e) => {
-          e.preventDefault();
-
-          dispatch(addPost({ title, content }));
-          navigate("/home");
-        }}
-      >
+      <form className="write-form" onSubmit={handleSubmit}>
         <div className="mb-3">
           <label htmlFor="title" className="form-label text-light">
             제목
@@ -31,10 +37,14 @@ function Write(props) {
             id="title"
             className="form-control dark-input"
             placeholder="제목을 입력하세요"
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
           />
+          {title.trim().length < 5 && (
+            <Form.Text className="text-danger">
+              제목은 5글자 이상 입력해야 합니다.
+            </Form.Text>
+          )}
         </div>
 
         <div className="mb-3">
@@ -46,15 +56,23 @@ function Write(props) {
             className="form-control dark-input"
             rows={10}
             placeholder="내용을 입력하세요"
-            onChange={(e) => {
-              setContent(e.target.value);
-            }}
-          ></textarea>
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+          />
+          {content.trim().length < 10 && (
+            <Form.Text className="text-danger">
+              내용은 10글자 이상 입력해야 합니다.
+            </Form.Text>
+          )}
         </div>
 
-        <button type="submit" className="btn btn-primary">
+        <Button
+          variant="primary"
+          type="submit"
+          disabled={title.trim().length < 5 || content.trim().length < 10}
+        >
           작성 완료
-        </button>
+        </Button>
       </form>
     </div>
   );

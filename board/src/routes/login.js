@@ -27,7 +27,7 @@ function Login() {
   };
 
   return (
-    <Container className="mt-4">
+    <div className="mt-4">
       <Form onSubmit={handleSubmit} className="write-form">
         <Form.Group controlId="username" className="mb-3">
           <Form.Label className="text-light">아이디</Form.Label>
@@ -39,7 +39,7 @@ function Login() {
           />
         </Form.Group>
 
-        <Form.Group controlId="password" className="mb-3">
+        <Form.Group controlId="password" style={{ marginBottom: "60px" }}>
           <Form.Label className="text-light">비밀번호</Form.Label>
           <Form.Control
             type="password"
@@ -64,7 +64,7 @@ function Login() {
           </Form.Group>
         </div>
       </Form>
-    </Container>
+    </div>
   );
 }
 
