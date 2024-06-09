@@ -14,8 +14,6 @@ import Home from "./routes/home.js";
 import MyNavbar from "components/Navbar";
 
 function App() {
-  const navigate = useNavigate();
-
   return (
     <div className="App">
       <MyNavbar />

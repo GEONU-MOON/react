@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Container, Form, Button } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-// import { loginUser } from "../store"; // 로그인 액션 생성 함수 (추후 구현 필요)
+import { Container, Form, Button, Alert } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../store";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "../App.css";
@@ -12,19 +12,19 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const { isLoggedIn, loginError } = useSelector((state) => state.auth);
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // 유효성 검사 (예시)
-    if (!username || !password) {
-      alert("모든 필드를 입력해주세요.");
-      return;
-    }
+    dispatch(login({ username, password }));
+  };
 
-    // dispatch(loginUser({ username, password })); // 로그인 액션 dispatch (추후 구현)
+  if (isLoggedIn) {
     // 로그인 성공 시 메인 페이지로 이동
     navigate("/home");
-  };
+    return null;
+  }
 
   return (
     <div className="mt-4">
@@ -48,7 +48,7 @@ function Login() {
             placeholder="비밀번호를 입력하세요"
           />
         </Form.Group>
-
+        {loginError && <Alert variant="danger">{loginError}</Alert>}
         <div className="d-flex flex-column align-items-center mt-3">
           <Button variant="primary" type="submit" className="w-100">
             로그인

@@ -29,9 +29,42 @@ const postSlice = createSlice({
   },
 });
 
+const authSlice = createSlice({
+  name: "auth",
+  initialState: {
+    isLoggedIn: false,
+    loginError: null,
+    dummyData: {
+      username: "moondy2209",
+      password: "1234",
+    },
+  },
+  reducers: {
+    login(state, action) {
+      const { username, password } = action.payload;
+      if (
+        username === state.dummyData.username &&
+        password === state.dummyData.password
+      ) {
+        state.isLoggedIn = true;
+        state.loginError = null;
+      } else {
+        state.isLoggedIn = false;
+        state.loginError = "아이디 또는 비밀번호가 일치하지 않습니다.";
+      }
+    },
+    logout(state) {
+      state.isLoggedIn = false;
+      state.loginError = null;
+    },
+  },
+});
+
 export const { addPost, deletePost, updatePost } = postSlice.actions;
+export const { login, logout } = authSlice.actions;
 export default configureStore({
   reducer: {
     posts: postSlice.reducer,
+    auth: authSlice.reducer,
   },
 });
