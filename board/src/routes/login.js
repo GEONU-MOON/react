@@ -1,30 +1,44 @@
 import React, { useState } from "react";
 import { Container, Form, Button, Alert } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { login } from "../store";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import "../App.css";
+import axios from "axios";
+
+const API_BASE_URL = "http://3.34.252.191:8080/api";
 
 function Login() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
 
-  const { isLoggedIn, loginError } = useSelector((state) => state.auth);
-
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    dispatch(login({ username, password }));
-  };
+    // 유효성 검사 (아이디, 비밀번호 입력 여부 확인)
+    if (!username || !password) {
+      setError("아이디와 비밀번호를 모두 입력해주세요.");
+      return;
+    }
 
-  if (isLoggedIn) {
-    // 로그인 성공 시 메인 페이지로 이동
-    navigate("/home");
-    return null;
-  }
+    try {
+      const requestData = { username, password }; // 요청 데이터 객체 생성
+
+      console.log("로그인 요청 데이터:", requestData); // 요청 데이터 출력
+
+      const response = await axios.post(
+        `${API_BASE_URL}/user/login`,
+        requestData
+      );
+
+      // 로그인 성공 시 토큰 저장 (localStorage 사용 예시)
+      localStorage.setItem("token", response.data.token);
+      navigate("/home");
+    } catch (error) {
+      console.error("로그인 실패:", error);
+      setError(error.response?.data?.message || "로그인에 실패했습니다.");
+    }
+  };
 
   return (
     <div className="mt-4">
@@ -48,7 +62,9 @@ function Login() {
             placeholder="비밀번호를 입력하세요"
           />
         </Form.Group>
-        {loginError && <Alert variant="danger">{loginError}</Alert>}
+
+        {error && <Alert variant="danger">{error}</Alert>}
+
         <div className="d-flex flex-column align-items-center mt-3">
           <Button variant="primary" type="submit" className="w-100">
             로그인
