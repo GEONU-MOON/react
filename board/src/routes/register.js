@@ -1,19 +1,19 @@
 import React, { useState } from "react";
-import { Container, Form, Button } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-// import { registerUser } from "../store"; // 회원가입 액션 생성 함수 (추후 구현 필요)
+import { Container, Form, Button, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import "../App.css";
+import axios from "axios";
+
+const API_BASE_URL = "http://3.34.252.191:8080/api";
 
 function Register() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState(""); // 이메일 상태 추가
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState(null);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     // 유효성 검사 (예시, 이메일 유효성 검사 추가)
@@ -31,12 +31,21 @@ function Register() {
       return;
     }
 
-    // dispatch(registerUser({ username, password, email })); // 회원가입 액션 dispatch (추후 구현)
-    navigate("/");
+    try {
+      const response = await axios.post(`${API_BASE_URL}/user/signup`, {
+        username,
+        password,
+        email,
+      });
+      console.log("회원가입 성공:", response.data);
+      navigate("/"); // 회원가입 성공 시 홈(/) 페이지로 이동
+    } catch (error) {
+      console.error("회원가입 실패:", error);
+      alert("회원가입에 실패했습니다.");
+    }
   };
 
   const validateEmail = (email) => {
-    // 간단한 이메일 유효성 검사 정규식
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
   };
@@ -76,7 +85,6 @@ function Register() {
 
         <Form.Group controlId="email" className="mb-3">
           {" "}
-          {/* 이메일 필드 추가 */}
           <Form.Label className="text-light">이메일 주소</Form.Label>
           <Form.Control
             type="email"
