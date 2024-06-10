@@ -1,17 +1,24 @@
+// Navbar.js (수정)
 import React from "react";
-import { Container, Nav, Navbar } from "react-bootstrap";
+import { Container, Nav, Navbar, Button } from "react-bootstrap";
 import { PencilSquare } from "react-bootstrap-icons";
-import { Link, useLocation } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux"; // useSelector 추가
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { logout } from "../store/store"; // logout 액션 import
 
 function MyNavbar() {
   const navigate = useNavigate();
   const location = useLocation();
-  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn); // 로그인 상태 가져오기
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const dispatch = useDispatch();
 
   const handleLogoClick = () => {
-    navigate(isLoggedIn ? "/home" : "/"); // 로그인 상태에 따라 이동 페이지 변경
+    navigate(isLoggedIn ? "/home" : "/");
+  };
+
+  const handleLogout = () => {
+    dispatch(logout()); // 로그아웃 액션 dispatch
+    navigate("/"); // 로그인 페이지로 이동
   };
 
   return (
@@ -27,6 +34,11 @@ function MyNavbar() {
               <PencilSquare /> 작성하기
             </Nav.Link>
           </Nav>
+        )}
+        {isLoggedIn && ( // 로그인 상태일 때만 로그아웃 버튼 표시
+          <Button variant="outline-light" onClick={handleLogout}>
+            로그아웃
+          </Button>
         )}
       </Container>
     </Navbar>

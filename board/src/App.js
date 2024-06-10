@@ -12,19 +12,22 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 import Home from "./pages/home.js";
 import MyNavbar from "components/Navbar";
+import ProtectedRoute from "store/ProtectedRoute";
 
 function App() {
   return (
     <div className="App">
       <MyNavbar />
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/home" element={<Home />} /> // home 페이지 라우트 추가
-        <Route path="/detail/:id" element={<Detail />} />
-        <Route path="/write" element={<Write />} />
-        <Route path="/edit/:id" element={<Edit />} />
-        <Route path="*" element={<div>Not Found</div>} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/detail/:id" element={<Detail />} />
+          <Route path="/write" element={<Write />} />
+          <Route path="/edit/:id" element={<Edit />} />
+          <Route path="*" element={<div>Not Found</div>} />
+        </Route>
       </Routes>
     </div>
   );
