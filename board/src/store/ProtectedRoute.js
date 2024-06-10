@@ -11,6 +11,10 @@ function ProtectedRoute() {
     location.pathname === "/" ||
     location.pathname === "/register";
 
+  if (!isAllowed) {
+    alert("로그인이 필요한 페이지입니다.");
+  }
+
   return isAllowed ? <Outlet /> : <Navigate to="/" />;
 }
 
