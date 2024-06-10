@@ -1,7 +1,6 @@
 import React from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { useSelector } from "react-redux";
-import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import Lists from "components/Lists";
 
 function Home() {

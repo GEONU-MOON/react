@@ -5,9 +5,10 @@ import { Link } from "react-router-dom";
 function CardItem({ post }) {
   return (
     <Card className="dark-card">
-      <Card.Body>
-        <Card.Title>{post.title}</Card.Title>
-        <Card.Text>{post.content}</Card.Text>
+      <Card.Body className="card-body-truncate">
+        <Card.Title className="card-title-truncate">{post.title}</Card.Title>
+        <hr className="card-divider" />
+        <Card.Text className="card-text-truncate">{post.content}</Card.Text>
       </Card.Body>
     </Card>
   );

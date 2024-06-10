@@ -17,9 +17,9 @@
   padding: 2rem;
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  margin: 0 auto; /* 좌우 auto로 설정하여 가운데 정렬 */
-  width: 90%; /* 화면 너비의 90%로 설정 (필요에 따라 조절) */
-  max-width: 500px; /* 최대 너비 제한 */
+  margin: 0 auto;
+  width: 90%;
+  max-width: 500px;
   margin-top: 170px;
 }
 
@@ -64,6 +64,34 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   min-height: 200px;
   margin-top: 20px;
+}
+
+.card-body-truncate {
+  max-height: 150px; /* 원하는 최대 높이 설정 */
+  overflow: hidden;
+}
+
+.card-title-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; /* 한 줄로 표시 */
+  max-width: 10ch; /* 최대 10자까지 표시 (ch 단위 사용) */
+}
+
+.card-text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: unset; /* 줄 수 제한 없음 */
+  -webkit-box-orient: vertical;
+  max-height: unset; /* 높이 제한 없음 */
+}
+
+.card-divider {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  border: 0;
+  border-top: 4px solid #ccc; /* 회색 실선, 두께 2px로 변경 */
 }
 
 .dark-card .card-title {
