@@ -12,9 +12,9 @@ function Login() {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [loginMessage, setLoginMessage] = useState(""); // 로그인 메시지 상태 추가
+  const [loginMessage, setLoginMessage] = useState("");
 
-  const { isLoggedIn, loginError } = useSelector((state) => state.auth);
+  const { isLoggedIn } = useSelector((state) => state.auth);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -30,11 +30,11 @@ function Login() {
         dispatch(login());
         navigate("/home");
       } else {
-        setLoginMessage("아이디 또는 비밀번호가 일치하지 않습니다."); // 로그인 실패 메시지 설정
+        setLoginMessage("아이디 또는 비밀번호가 일치하지 않습니다.");
       }
     } catch (error) {
       console.error("Error fetching user data:", error);
-      setLoginMessage("사용자 데이터를 가져오는 중 오류가 발생했습니다."); // 에러 메시지 설정
+      setLoginMessage("사용자 데이터를 가져오는 중 오류가 발생했습니다.");
     }
   };
 

@@ -26,8 +26,8 @@ function App() {
           <Route path="/detail/:id" element={<Detail />} />
           <Route path="/write" element={<Write />} />
           <Route path="/edit/:id" element={<Edit />} />
-          <Route path="*" element={<div>Not Found</div>} />
         </Route>
+        <Route path="*" element={<div>Not Found</div>} />
       </Routes>
     </div>
   );
