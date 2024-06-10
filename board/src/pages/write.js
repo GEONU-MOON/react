@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Form, Button } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { addPost } from "../store.js";
+import { addPost } from "../store/store.js";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
 

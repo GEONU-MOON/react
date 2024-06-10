@@ -2,7 +2,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
 import { useState, useEffect } from "react";
 import { Container, Form, Button } from "react-bootstrap";
-import { updatePost } from "../store";
+import { updatePost } from "../store/store.js";
 import { ArrowLeft } from "react-bootstrap-icons";
 
 function Edit() {

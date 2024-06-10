@@ -1,16 +1,16 @@
 import "./App.css";
 import { useState } from "react";
 import { Container, Nav, Navbar, Row, Col, Card } from "react-bootstrap";
-import Write from "./routes/write.js";
-import Edit from "./routes/edit.js";
-import Detail from "./routes/detail.js";
-import Login from "./routes/login.js";
-import Register from "./routes/register.js";
+import Write from "./pages/write.js";
+import Edit from "./pages/edit.js";
+import Detail from "./pages/detail.js";
+import Login from "./pages/login.js";
+import Register from "./pages/register.js";
 import { Routes, Route, Link, useNavigate, Outlet } from "react-router-dom";
 import { PencilSquare } from "react-bootstrap-icons";
 import axios from "axios";
 import { useSelector } from "react-redux";
-import Home from "./routes/home.js";
+import Home from "./pages/home.js";
 import MyNavbar from "components/Navbar";
 
 function App() {
