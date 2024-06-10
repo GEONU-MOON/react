@@ -33,7 +33,6 @@ function Login() {
         setLoginMessage("아이디 또는 비밀번호가 일치하지 않습니다.");
       }
     } catch (error) {
-      console.error("Error fetching user data:", error);
       setLoginMessage("사용자 데이터를 가져오는 중 오류가 발생했습니다.");
     }
   };
