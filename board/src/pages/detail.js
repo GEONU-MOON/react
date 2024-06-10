@@ -4,7 +4,6 @@ import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { deletePost } from "../store/store.js";
 import { ArrowLeft } from "react-bootstrap-icons";
-import { Container, Form, Button } from "react-bootstrap";
 
 function Detail() {
   const { id } = useParams();

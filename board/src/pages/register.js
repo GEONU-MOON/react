@@ -1,22 +1,18 @@
 import React, { useState } from "react";
 import { Container, Form, Button } from "react-bootstrap";
-import { useDispatch } from "react-redux";
-// import { registerUser } from "../store"; // 회원가입 액션 생성 함수 (추후 구현 필요)
 import { useNavigate } from "react-router-dom";
 import "../App.css";
 
 function Register() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [email, setEmail] = useState(""); // 이메일 상태 추가
+  const [email, setEmail] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // 유효성 검사 (예시, 이메일 유효성 검사 추가)
     if (!username || !password || !confirmPassword || !email) {
       alert("모든 필드를 입력해주세요.");
       return;
@@ -26,17 +22,14 @@ function Register() {
       return;
     }
     if (!validateEmail(email)) {
-      // 이메일 유효성 검사 함수 호출
       alert("올바른 이메일 형식이 아닙니다.");
       return;
     }
 
-    // dispatch(registerUser({ username, password, email })); // 회원가입 액션 dispatch (추후 구현)
     navigate("/");
   };
 
   const validateEmail = (email) => {
-    // 간단한 이메일 유효성 검사 정규식
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
   };
@@ -76,7 +69,6 @@ function Register() {
 
         <Form.Group controlId="email" className="mb-3">
           {" "}
-          {/* 이메일 필드 추가 */}
           <Form.Label className="text-light">이메일 주소</Form.Label>
           <Form.Control
             type="email"

@@ -1,10 +1,9 @@
-// Navbar.js (수정)
 import React from "react";
 import { Container, Nav, Navbar, Button } from "react-bootstrap";
 import { PencilSquare } from "react-bootstrap-icons";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { logout } from "../store/store"; // logout 액션 import
+import { logout } from "../store/store";
 
 function MyNavbar() {
   const navigate = useNavigate();
@@ -17,8 +16,8 @@ function MyNavbar() {
   };
 
   const handleLogout = () => {
-    dispatch(logout()); // 로그아웃 액션 dispatch
-    navigate("/"); // 로그인 페이지로 이동
+    dispatch(logout());
+    navigate("/");
   };
 
   return (
@@ -35,7 +34,7 @@ function MyNavbar() {
             </Nav.Link>
           </Nav>
         )}
-        {isLoggedIn && ( // 로그인 상태일 때만 로그아웃 버튼 표시
+        {isLoggedIn && (
           <Button variant="outline-light" onClick={handleLogout}>
             로그아웃
           </Button>

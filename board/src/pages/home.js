@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row, Col, Card } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import Lists from "components/Lists";
 
